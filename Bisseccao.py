@@ -31,32 +31,11 @@ def find_equilibrium(beta, gamma):
 
 # Parâmetros do modelo
 beta = 0.5
-gamma = 0.5
+gamma = 0.3
 
 # Encontrando o ponto de equilíbrio
 equilibrium = find_equilibrium(beta, gamma)
 print("Ponto de equilíbrio: S =", equilibrium[0], "I =", equilibrium[1], "R =", equilibrium[2])
-
-# Função que calcula a taxa de reprodução básica (R0)
-def calculate_r0(beta, gamma):
-    return beta / gamma
-
-# Calculando a taxa de reprodução básica
-r0 = calculate_r0(beta, gamma)
-print("Taxa de reprodução básica (R0):", r0)
-
-# Função que calcula a estabilidade do ponto de equilíbrio
-def calculate_stability(r0):
-    if r0 < 1:
-        return "Estável"
-    elif r0 > 1:
-        return "Instável"
-    else:
-        return "Indeterminado"
-
-# Verificando a estabilidade do ponto de equilíbrio
-stability = calculate_stability(r0)
-print("Estabilidade do ponto de equilíbrio:", stability)
 
 # Gerando gráfico da curva SIR
 t = np.linspace(0, 100, 1000)  # Intervalo de tempo
@@ -71,9 +50,10 @@ R = sir_solution[:, 2]
 # Plotando os resultados
 plt.figure(figsize=(10, 6))
 plt.plot(t, S, label='Suscetíveis')
-plt.plot(t, I,  label='Infectados') 
+plt.plot(t, I, label='Infectados') 
 plt.plot(t, R, label='Recuperados')
 plt.xlabel('Tempo') 
-plt.ylabel('Número de infectados') 
+plt.ylabel('Proporção da População') 
 plt.legend()
+plt.grid(True)
 plt.show()
